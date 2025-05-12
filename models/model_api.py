@@ -212,14 +212,25 @@ async def handle_connection(websocket):
 
 async def start_websocket_server():
     logger.info(f"Starting RealTutor AI WebSocket server on ws://localhost:{WS_PORT} ...")
-    async with websockets.serve(
-        handle_connection,
-        "localhost",
-        WS_PORT,
-        ping_interval=20,
-        ping_timeout=20,
-        close_timeout=10
-    ):
+    # async with websockets.serve(
+    #     handle_connection,
+    #     "localhost",
+    #     WS_PORT,
+    #     ping_interval=20,
+    #     ping_timeout=20,
+    #     close_timeout=10
+    # ):
+
+# In start_websocket_server function
+async with websockets.serve(
+    handle_connection,
+    "0.0.0.0",  # Change from localhost to 0.0.0.0
+    WS_PORT,
+    ping_interval=20,
+    ping_timeout=20,
+    close_timeout=10
+):
+
         await asyncio.Future()
 
 @app.route('/status', methods=['GET'])
@@ -244,8 +255,14 @@ def generate():
         logger.error(f"Error generating response: {e}")
         return jsonify({'error': str(e)}), 500
 
+# def run_flask_app():
+#     app.run(host='localhost', port=HTTP_PORT, debug=False)
+
+    # In model_api.py, find the run_flask_app function
 def run_flask_app():
-    app.run(host='localhost', port=HTTP_PORT, debug=False)
+    # Change from localhost to 0.0.0.0
+    port = int(os.environ.get("PORT", 3001))
+    app.run(host='0.0.0.0', port=port, debug=False)
 
 if __name__ == "__main__":
     # Start Flask in a separate thread
