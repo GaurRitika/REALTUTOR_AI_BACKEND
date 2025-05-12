@@ -211,27 +211,29 @@ async def handle_connection(websocket):
         logger.error(f"Unexpected error in connection handler: {e}")
 
 async def start_websocket_server():
-    logger.info(f"Starting RealTutor AI WebSocket server on ws://localhost:{WS_PORT} ...")
-    # async with websockets.serve(
-    #     handle_connection,
-    #     "localhost",
-    #     WS_PORT,
-    #     ping_interval=20,
-    #     ping_timeout=20,
-    #     close_timeout=10
-    # ):
-
-# In start_websocket_server function
-async with websockets.serve(
-    handle_connection,
-    "0.0.0.0",  # Change from localhost to 0.0.0.0
-    WS_PORT,
-    ping_interval=20,
-    ping_timeout=20,
-    close_timeout=10
-):
-
+    logger.info(f"Starting RealTutor AI WebSocket server on port {WS_PORT} ...")
+    async with websockets.serve(
+        handle_connection,
+        "0.0.0.0",  # Change from localhost to 0.0.0.0
+        WS_PORT,
+        ping_interval=20,
+        ping_timeout=20,
+        close_timeout=10
+    ):
         await asyncio.Future()
+
+
+# async def start_websocket_server():
+#     logger.info(f"Starting RealTutor AI WebSocket server on ws://localhost:{WS_PORT} ...")
+#     async with websockets.serve(
+#         handle_connection,
+#         "localhost",
+#         WS_PORT,
+#         ping_interval=20,
+#         ping_timeout=20,
+#         close_timeout=10
+#     ):
+#         await asyncio.Future()
 
 @app.route('/status', methods=['GET'])
 def status():
