@@ -1,7 +1,3 @@
-// Actually the places where this- "platform_system == "Windows"" is mentioned , thies dependcies are windows system specific , so may there 
-is a room of possibilites that may be the project will crash for mac or linux users.
-
-
 annotated-types==0.7.0
 anyio==4.9.0
 beautifulsoup4==4.12.3
