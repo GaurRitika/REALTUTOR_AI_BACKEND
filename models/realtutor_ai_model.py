@@ -16,7 +16,7 @@ class RealTutorAI:
            
             api_key=os.getenv("GROQ_API_KEY")
         )
-        
+          print("MODEL USED BY REALTUTOR AI:", "llama-3.1-70b-versatile")
         # Professional developer-oriented system prompt
         self.system_prompt = """You are an elite AI coding assistant providing expert-level responses like the most advanced versions of Cursor AI and Highlight. Your outputs are indistinguishable from those of a senior developer.
 
